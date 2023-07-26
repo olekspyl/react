@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import { ButtonEl } from './buttonEl'
 import { Stats } from './Stats'
+import { Notification } from './notification';
 import { Container } from './App.styled';
+
 
 class App extends Component {
   state = {
@@ -41,13 +43,14 @@ class App extends Component {
     const total = this.countTotalFeedback();
 
     return (
-      <Container>
+      <Container className="shadow p-3 mb-5 bg-body-tertiary rounded">
         <h1>Please, leave feedback</h1>
         <ul>
           <ButtonEl handleButton={this.handleButton} stats={{ ...this.state }}
            ></ButtonEl>
         </ul>
-          <h2>Statistics</h2>
+        <h2>Statistics</h2>
+        {!total && <Notification></Notification>}
           {total && <ul>
           <Stats stats={{ ...this.state }}
            total={this.countTotalFeedback} positivePercentage={this.countPositiveFeedbackPercentage}></Stats>
