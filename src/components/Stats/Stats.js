@@ -1,7 +1,6 @@
-const Stats = ({ stats }) => {
+const Stats = ({ stats, total, positivePercentage }) => {
   const keys = Object.keys(stats);
-
-  return keys.map((item, idx) => {
+  const elems = keys.map((item, idx) => {
     return (
       <li key={idx}>
         <span>
@@ -10,6 +9,17 @@ const Stats = ({ stats }) => {
       </li>
     );
   });
+  return (
+    <>
+      {elems}
+      <li>
+        <span>total feedback: {total()}</span>
+      </li>
+      <li>
+        <span> positive percentage: {positivePercentage()}%</span>
+      </li>
+    </>
+  );
 };
 
 export { Stats };
