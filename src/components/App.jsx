@@ -5,6 +5,8 @@ import { Filter } from "./filter";
 import { nanoid } from 'nanoid';
 
 
+const KEY_STORAGE='contact'
+
 class App extends Component {
  state = {
   contacts: [
@@ -17,14 +19,16 @@ class App extends Component {
    number: '',
   filter: '',
   }
-  
-  getFormData = (data) => {
+
+
+  addContact = (data) => {
     const { contacts } = this.state;
     const newContact = { ...data, id: nanoid() };
     const existedContactName = contacts.find(contact => contact.name.toLowerCase() === newContact.name.toLowerCase());
     const existedContactNumber = contacts.find(contact => contact.number === newContact.number);
     const filteredContact = contacts.filter(contact => contact.number === newContact.number);
     
+    localStorage.setItem(KEY_STORAGE, JSON.stringify(newContact));
 
     if (!existedContactName && !existedContactNumber) {
           return this.setState(prevState => ({contacts: [newContact, ...prevState.contacts]}))
@@ -36,27 +40,29 @@ class App extends Component {
     }
   }
 
-  handleFilterChange = (e) => {
+  filterContacts = (e) => {
     this.setState({ filter: e.target.value });
   } 
 
-  handleDeleteBtn = (id) => {
+  deleteContact = (id) => {
     const { contacts } = this.state;
     const idx = contacts.findIndex(contact => contact.id === id);
     contacts.splice(idx, 1);
-    this.setState({contacts: this.state.contacts})
+    this.setState({ contacts: this.state.contacts });
    }
 
   
   render() {
     const { contacts, filter } = this.state;
-
     const filteredContacts = contacts.filter(contact => contact.name.includes(filter));
+
+    localStorage.setItem(KEY_STORAGE, JSON.stringify(contacts));
+
     return (
       <>
-        <Form getFormData={this.getFormData}></Form>
-        <Filter handleFilterChange={this.handleFilterChange} value={filter}></Filter>
-        <Contacts listContacts={filteredContacts} onDeleteClick={this.handleDeleteBtn}></Contacts>      
+        <Form getFormData={this.addContact}></Form>
+        <Filter handleFilterChange={this.filterContacts} value={filter}></Filter>
+        <Contacts listContacts={filteredContacts} onDeleteClick={this.deleteContact}></Contacts>      
         </>
         
       );
