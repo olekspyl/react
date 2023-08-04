@@ -13,6 +13,7 @@ This project is built using the following tools:
 3. Library 'Notiflix' for user notifications.
 4. Library 'Styled-Component' for stylization.
 5. Library 'React-Loader-Spinner' for loading.
+6. Library 'Axios' for fetching data.
 
 ### Main principals and methodics are used in
 
@@ -22,3 +23,4 @@ This project is built using the following tools:
 - render on condition
 - architecture of state
 - pagination, HTTPS-requests
+- asynchronous React

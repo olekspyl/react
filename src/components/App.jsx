@@ -6,9 +6,7 @@ import { ImageGallery } from './imageGallery';
 import { Modal } from './modal';
 import { Button } from './button';
 import { Error } from './searchbar/Searchbar.styled';
-
-
-const API_KEY = '38311066-df12cc60e023e61528f3463e4';
+import * as API from 'services/fetchImages';
 
 
 class App extends React.Component {
@@ -31,38 +29,41 @@ class App extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { page, filter} = this.state;
+
     if (prevState.page !== this.state.page) {
       this.setState({ isLoading: true });
-      this.imagesAxios();
+      this.loadImages(page, filter);
+
     } else if (prevState.filter !== this.state.filter) {
       this.setState({
         isLoading: true,
         images: []
       });
-      this.imagesAxios();
+      
+      this.loadImages(page, filter);
     }
   }
 
-
-  imagesAxios = () => {
-    const { page, filter } = this.state;
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    fetch(`https://pixabay.com/api/?q=${filter}&key=${API_KEY}&page=${page}&image_type=photo&orientation=horizontal&per_page=12`, { signal }).then(res => res.json()).then(
-      (resp) => {
-        if (!resp.hits.length) {
+  loadImages = async (page, filter) => {    
+    try {
+        const fetchedImages = await API.fetchImages(page, filter);
+       if (!fetchedImages.hits.length) {
           this.setState({ hasError: true });
-        };
-
-        this.setState(prevState => {
+       } else {
+          this.setState(prevState => {
           return {
-            images: [...prevState.images, ...resp.hits],
+            images: [...prevState.images, ...fetchedImages.hits],
           };
         });
+        }
+        
+      } finally {
+        this.setState({ isLoading: false })
+      }
 
-      }).finally(() => this.setState({ isLoading: false }))
   }
+
 
   onSubmit = (filter) => {
     if (!filter) {
@@ -99,6 +100,7 @@ class App extends React.Component {
 
   render() {
     const { images, hasError, isLoading, isModalOpen } = this.state;
+    
     return (
       <>
         <Searchbar onSubmit={this.onSubmit}></Searchbar>
