@@ -1,27 +1,29 @@
-import {Component} from 'react'
-import { SearchbarEl, SearchForm, SearchBtn, SearchFormLabel, SearchFormInput } from './Searchbar.styled'
+import { useState } from 'react';
+import {
+  SearchbarEl,
+  SearchForm,
+  SearchBtn,
+  SearchFormLabel,
+  SearchFormInput,
+} from './Searchbar.styled';
 
-export class Searchbar extends Component {
-  state = {
-  filter: '',
-}
+export const Searchbar = ({ onSubmit }) => {
+  const [filter, setFilter] = useState('');
 
-  handleChange = e => {
-    const filter = e.target.value
-    this.setState({ filter });
+  const handleChange = e => {
+    const filter = e.target.value;
+    setFilter(filter);
   };
 
-  onSubmit = (e) => {
+  const onSubmitForm = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.filter)
-    this.setState({ filter: '' });
+    onSubmit(filter);
+    setFilter('');
+  };
 
-  }
-
-  render() {
-    return (
+  return (
     <SearchbarEl className="searchbar">
-      <SearchForm className="form" onSubmit={this.onSubmit}>
+      <SearchForm className="form" onSubmit={onSubmitForm}>
         <SearchBtn type="submit" className="button">
           <SearchFormLabel className="button-label">Search</SearchFormLabel>
         </SearchBtn>
@@ -31,12 +33,10 @@ export class Searchbar extends Component {
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
-            onChange={this.handleChange}
-            value={this.state.filter}
+          onChange={handleChange}
+          value={filter}
         />
       </SearchForm>
     </SearchbarEl>
   );
-  }
-  
 };
