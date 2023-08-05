@@ -1,70 +1,61 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { FormEl } from './Form.styled';
 
-class Form extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+export const Form = ({ getFormData }) => {
+  const [name, setName] = useState();
+  const [number, setNumber] = useState();
 
-  handleSubmit = e => {
+  const data = { name, number };
+
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.getFormData({ ...this.state });
-    this.resetInput();
+    getFormData(data);
+    setName('');
+    setNumber('');
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+  const handleChange = e => {
+    if (e.target.name === 'name') {
+      setName(e.target.value);
+    } else {
+      setNumber(e.target.value);
+    }
   };
 
-  resetInput = () => {
-    this.setState({
-      name: '',
-      number: '',
-    });
-  };
-
-  render() {
-    const { name, number } = this.state;
-
-    return (
-      <FormEl onSubmit={this.handleSubmit}>
-        <h1>Phonebook</h1>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            name="name"
-            type="text"
-            className="form-control"
-            id="name"
-            aria-describedby="nameHelp"
-            onChange={this.handleChange}
-            value={name}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="number" className="form-label">
-            Number
-          </label>
-          <input
-            type="tel"
-            className="form-control"
-            id="number"
-            aria-describedby="nameHelp"
-            name="number"
-            onChange={this.handleChange}
-            value={number}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Add to contact list
-        </button>
-      </FormEl>
-    );
-  }
-}
-
-export { Form };
+  return (
+    <FormEl onSubmit={handleSubmit}>
+      <h1>Phonebook</h1>
+      <div className="mb-3">
+        <label htmlFor="name" className="form-label">
+          Name
+        </label>
+        <input
+          name="name"
+          type="text"
+          className="form-control"
+          id="name"
+          aria-describedby="nameHelp"
+          onChange={handleChange}
+          value={name}
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="number" className="form-label">
+          Number
+        </label>
+        <input
+          type="tel"
+          className="form-control"
+          id="number"
+          aria-describedby="nameHelp"
+          name="number"
+          onChange={handleChange}
+          value={number}
+        />
+      </div>
+      <button type="submit" className="btn btn-primary">
+        Add to contact list
+      </button>
+    </FormEl>
+  );
+};

@@ -1,6 +1,7 @@
 # Your own phonebook
 
-This project is built on React without using hooks. It will help you saving your
+This project is built on React in 2 variants: without using hooks (commit 'add
+readme') and with hooks (commit 'add hooks'). It will help you saving your
 contacts and as needed deleting.
 
 ## Tools
@@ -22,3 +23,4 @@ This project is built using the following tools:
 - state and setState()
 - lifting state up
 - forms
+- hooks
