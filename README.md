@@ -1,7 +1,8 @@
 # Leave feedback
 
-This project is built on React without using hooks. It will help you leave
-feedback and evaluate quality of something based on other feedback.
+This project is built on React in 2 variants: without using hooks (commit 'add
+readme') and with hooks (commit 'add hooks'). It will help you leave feedback
+and evaluate quality of something based on other feedback.
 
 ## Tools
 
@@ -21,3 +22,4 @@ This project is built using the following tools:
 - state and setState()
 - lifting state up
 - forms
+- hooks
