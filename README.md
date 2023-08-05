@@ -1,8 +1,9 @@
 # React image finder
 
-This project is built on React without using hooks. It will help you find any
-images you want. The source of images is Pixabay, which provided by RESTful API
-interface.
+This project is built on React in 2 variants: without using hooks (commit
+'replace fetch on axios ') and with hooks (commit 'add hooks'). It will help you
+find any images you want. The source of images is Pixabay, which provided by
+RESTful API interface.
 
 ## Tools
 
@@ -24,3 +25,4 @@ This project is built using the following tools:
 - architecture of state
 - pagination, HTTPS-requests
 - asynchronous React
+- hooks
