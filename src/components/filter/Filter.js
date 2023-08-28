@@ -1,6 +1,16 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { FilterEl } from './Filter.styled';
+import { setFilter } from 'redux/filterSlice';
+import { getFilter } from 'redux/selectores';
 
-const Filter = ({ handleFilterChange, filter }) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
+
+  const filterContacts = e => {
+    dispatch(setFilter(e.target.value));
+  };
+
   return (
     <FilterEl className="mb-3">
       <label htmlFor="filter" className="form-label">
@@ -13,7 +23,7 @@ const Filter = ({ handleFilterChange, filter }) => {
         id="filter"
         value={filter}
         aria-describedby="filterHelp"
-        onChange={handleFilterChange}
+        onChange={filterContacts}
       ></input>
     </FilterEl>
   );

@@ -1,17 +1,21 @@
 import { Contact } from '../contact';
 import { ContactsEl } from './Contacts.styled';
+import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectores';
 
-const Contacts = ({ listContacts, onDeleteClick }) => {
+const Contacts = () => {
+  const contacts = useSelector(getContacts);
+
   return (
-    <ContactsEl>
-      <h2>Contacts</h2>
-      <ul className="list-group">
-        <Contact
-          listContacts={listContacts}
-          onDeleteClick={onDeleteClick}
-        ></Contact>
-      </ul>
-    </ContactsEl>
+    <>
+      {!contacts.length && <p>Sorry, but you don't have any contacts</p>}
+      <ContactsEl>
+        <h2>Contacts</h2>
+        <ul className="list-group">
+          <Contact />
+        </ul>
+      </ContactsEl>
+    </>
   );
 };
 

@@ -1,24 +1,38 @@
-import { useState } from 'react';
 import { FormEl } from './Form.styled';
+import { getContacts } from 'redux/selectores';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 
 export const Form = ({ getFormData }) => {
-  const [name, setName] = useState();
-  const [number, setNumber] = useState();
-
-  const data = { name, number };
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const handleSubmit = e => {
     e.preventDefault();
-    getFormData(data);
-    setName('');
-    setNumber('');
-  };
+    const data = {
+      name: e.target.name.value.trim(),
+      number: e.target.number.value.trim(),
+    };
 
-  const handleChange = e => {
-    if (e.target.name === 'name') {
-      setName(e.target.value);
+    const existedContactName = contacts.find(
+      contact => contact.name.toLowerCase() === data.name.toLowerCase()
+    );
+    const existedContactNumber = contacts.find(
+      contact => contact.number === data.number
+    );
+
+    const filteredContact = contacts.filter(
+      contact => contact.number === data.number
+    );
+
+    if (!existedContactName && !existedContactNumber) {
+      dispatch(addContact(data));
+    } else if (existedContactNumber) {
+      window.alert(
+        `This number has already saved in the phonebook as ${filteredContact[0].name}`
+      );
     } else {
-      setNumber(e.target.value);
+      alert('Contact has already saved in the phonebook');
     }
   };
 
@@ -35,8 +49,6 @@ export const Form = ({ getFormData }) => {
           className="form-control"
           id="name"
           aria-describedby="nameHelp"
-          onChange={handleChange}
-          value={name}
         />
       </div>
       <div className="mb-3">
@@ -49,8 +61,6 @@ export const Form = ({ getFormData }) => {
           id="number"
           aria-describedby="nameHelp"
           name="number"
-          onChange={handleChange}
-          value={number}
         />
       </div>
       <button type="submit" className="btn btn-primary">
