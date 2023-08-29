@@ -1,15 +1,18 @@
+import { nanoid } from 'nanoid';
 import { FormEl } from './Form.styled';
 import { getContacts } from 'redux/selectores';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 
-export const Form = ({ getFormData }) => {
+export const Form = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
+  const id = nanoid();
 
   const handleSubmit = e => {
     e.preventDefault();
     const data = {
+      id,
       name: e.target.name.value.trim(),
       number: e.target.number.value.trim(),
     };
@@ -34,6 +37,8 @@ export const Form = ({ getFormData }) => {
     } else {
       alert('Contact has already saved in the phonebook');
     }
+
+    e.target.reset();
   };
 
   return (

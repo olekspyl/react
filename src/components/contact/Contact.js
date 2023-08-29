@@ -7,14 +7,15 @@ const Contact = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
-  const KEY_STORAGE = 'contacts';
 
-  localStorage.setItem(KEY_STORAGE, JSON.stringify(contacts));
+  console.log(contacts);
+  console.log(filter);
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  const filteredContacts = contacts.filter(contact => {
+    return contact.name.toLowerCase().includes(filter.toLowerCase());
+  });
 
+  // const filteredContacts = [];
   const onDeleteClick = id => {
     dispatch(deleteContact(id));
   };
