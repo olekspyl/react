@@ -1,7 +1,7 @@
 # Your own phonebook
 
 This project is built on React in 3 variants: without using hooks (commit 'add
-readme'), with hooks (commit 'add hooks') and with Redux State Manager. It will help you saving your
+readme'), with hooks (commit 'add hooks') and with Redux State Manager (commit 'add redux-persist'). It will help you saving your
 contacts and as needed deleting.
 
 ## Tools
