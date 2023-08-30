@@ -11,7 +11,7 @@ This project is built using the following tools:
 1. Webpack as a handler.
 2. Library 'React', 'React DOM'.
 3. Library 'Nanoid' for adding id.
-4. Library 'Styled-Component' for stylization.
+4. Library 'Styled-Component' and Bootstrap for stylization.
 
 ## Main principals and methodics are used in
 
