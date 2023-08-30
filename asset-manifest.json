@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-components-state-hooks-learning/static/css/main.7acaea2f.css",
-    "main.js": "/react-components-state-hooks-learning/static/js/main.07d3183d.js",
+    "main.css": "/react-components-state-hooks-learning/static/css/main.b5320759.css",
+    "main.js": "/react-components-state-hooks-learning/static/js/main.c558e152.js",
     "index.html": "/react-components-state-hooks-learning/index.html",
-    "main.7acaea2f.css.map": "/react-components-state-hooks-learning/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/react-components-state-hooks-learning/static/js/main.07d3183d.js.map"
+    "main.b5320759.css.map": "/react-components-state-hooks-learning/static/css/main.b5320759.css.map",
+    "main.c558e152.js.map": "/react-components-state-hooks-learning/static/js/main.c558e152.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.b5320759.css",
+    "static/js/main.c558e152.js"
   ]
 }
